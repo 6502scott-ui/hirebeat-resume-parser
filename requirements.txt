@@ -2,3 +2,4 @@ fastapi
 uvicorn
 PyMuPDF
 python-multipart
+httpx
