@@ -3,3 +3,5 @@ uvicorn
 PyMuPDF
 python-multipart
 httpx
+sentence-transformers
+numpy

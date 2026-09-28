@@ -1,0 +1,55 @@
+{
+  "role_id": 1,
+  "role": "Business & Data Analyst",
+  "matching_version": "hitl-v2",
+  "criteria": [
+    {
+      "name": "Technical Background",
+      "text": "Background in Mathematics, Computer Science, Statistics, Physics, Linguistics, or a related technical field",
+      "weight": 0.10,
+      "allowed_sections": ["education"]
+    },
+    {
+      "name": "Business Understanding",
+      "text": "Experience understanding business needs, customer requirements, or business problems",
+      "weight": 0.20,
+      "allowed_sections": ["experience", "projects"]
+    },
+    {
+      "name": "Data Analysis",
+      "text": "Experience analyzing data to generate insights and support business decisions",
+      "weight": 0.20,
+      "allowed_sections": ["experience", "projects"]
+    },
+    {
+      "name": "Python and SQL",
+      "text": "Experience using Python or SQL for data analysis",
+      "weight": 0.15,
+      "allowed_sections": ["skills", "experience", "projects"]
+    },
+    {
+      "name": "Data Visualization",
+      "text": "Experience using Tableau, Power BI, or similar visualization tools",
+      "weight": 0.10,
+      "allowed_sections": ["skills", "experience", "projects"]
+    },
+    {
+      "name": "Presentation and Reporting",
+      "text": "Experience presenting analytical results or creating reports and presentations",
+      "weight": 0.10,
+      "allowed_sections": ["experience", "projects"]
+    },
+    {
+      "name": "Communication",
+      "text": "Experience communicating analytical results to stakeholders or non-technical audiences",
+      "weight": 0.10,
+      "allowed_sections": ["experience", "projects"]
+    },
+    {
+      "name": "Initiative and Problem Solving",
+      "text": "Demonstrated initiative, problem solving, or ability to work through unfamiliar problems",
+      "weight": 0.05,
+      "allowed_sections": ["experience", "projects"]
+    }
+  ]
+}
