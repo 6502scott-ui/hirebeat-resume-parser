@@ -71,7 +71,7 @@ def build_evidence_chunks(resume_chunks):
 
         if section in {"experience", "projects"}:
             parts = re.split(
-                r"\s*[•;]\s*|\n+",
+                r"\s*[•▪]\s*|\n+|(?<=[.!?])\s+",
                 text,
             )
 

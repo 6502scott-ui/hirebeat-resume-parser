@@ -1,25 +1,32 @@
-from embedding import _model
+from tokenizers import Tokenizer
 import re
 
+
+TOKENIZER = Tokenizer.from_pretrained(
+    "sentence-transformers/all-MiniLM-L6-v2"
+)
+
+# We handle chunking ourselves, so the tokenizer must not truncate input.
+TOKENIZER.no_truncation()
+TOKENIZER.no_padding()
+SPECIAL_TOKEN_COUNT = (
+    len(TOKENIZER.encode("test", add_special_tokens=True).ids)
+    - len(TOKENIZER.encode("test", add_special_tokens=False).ids)
+)
 CHUNK_SIZE = 220
-
-
+MAX_MODEL_LENGTH = 256
 def chunk_text(text: str, chunk_size: int = CHUNK_SIZE):
-    tokenizer = _model.tokenizer
-
-    token_ids = tokenizer.encode(
+    token_ids = TOKENIZER.encode(
         text,
         add_special_tokens=False,
-        truncation=False,
-        verbose=False,
-    )
+    ).ids
 
     chunks = []
 
     for start in range(0, len(token_ids), chunk_size):
         chunk_token_ids = token_ids[start:start + chunk_size]
 
-        chunk_text = tokenizer.decode(
+        chunk_text = TOKENIZER.decode(
             chunk_token_ids,
             skip_special_tokens=True,
         )
@@ -293,17 +300,14 @@ def section_aware_chunk_text(text: str, chunk_size: int = CHUNK_SIZE):
 
         for chunk_index, chunk in enumerate(text_chunks):
             token_count = len(
-                _model.tokenizer.encode(
+                TOKENIZER.encode(
                     chunk,
                     add_special_tokens=False,
-                    truncation=False,
-                )
+                ).ids
             )
-            max_model_length = _model.max_seq_length
+            max_model_length = MAX_MODEL_LENGTH
 
-            special_token_count = _model.tokenizer.num_special_tokens_to_add(
-                pair=False
-            )
+            special_token_count = SPECIAL_TOKEN_COUNT
 
             max_content_length = (
                 max_model_length - special_token_count
@@ -389,11 +393,10 @@ def jd_section_aware_chunk_text(text: str, chunk_size: int = CHUNK_SIZE):
 
         for chunk_index, chunk in enumerate(text_chunks):
             token_count = len(
-                _model.tokenizer.encode(
-                    chunk,
+                TOKENIZER.encode(
+                    text,
                     add_special_tokens=False,
-                    truncation=False,
-                )
+                ).ids
             )
 
             output_chunks.append({

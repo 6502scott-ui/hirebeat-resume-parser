@@ -3,5 +3,6 @@ uvicorn
 PyMuPDF
 python-multipart
 httpx
-sentence-transformers
+huggingface-hub
 numpy
+tokenizers
