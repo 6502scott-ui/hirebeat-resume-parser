@@ -113,7 +113,8 @@ def score_criterion(
     candidate_chunks = [
         chunk
         for chunk in resume_chunks
-        if chunk["section"] in allowed_sections
+        if chunk.get("section") in allowed_sections
+        and str(chunk.get("text", "")).strip()
     ]
 
     if not candidate_chunks:
@@ -127,9 +128,12 @@ def score_criterion(
     best_chunk = None
 
     for chunk in candidate_chunks:
-        chunk_vector = embed_text(
-            chunk["text"]
-        )
+        chunk_text = str(chunk.get("text", "")).strip()
+
+        if not chunk_text:
+            continue
+
+        chunk_vector = embed_text(chunk_text)
 
         score = float(
             cosine_similarity(
